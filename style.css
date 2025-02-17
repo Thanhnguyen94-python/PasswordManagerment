@@ -1,70 +1,73 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset CSS */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
 }
 
 .container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3 {
+/* Form đăng nhập */
+.login-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
     color: #333;
 }
 
-input[type="text"], input[type="password"] {
+.login-form input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-button.btn {
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button.btn:hover {
-    background-color: #45a049;
-}
-
-table {
+.login-form button {
     width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
     padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-}
-
-button {
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: white;
+    background-color: #007bff;
+    color: #fff;
     border: none;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #d32f2f;
+.login-form button:hover {
+    background-color: #0056b3;
+}
+
+/* Giao diện chính */
+.main-content {
+    display: none; /* Ẩn giao diện chính ban đầu */
+    margin-top: 20px;
 }
 
 .search-box {
@@ -74,36 +77,119 @@ button:hover {
 .search-box input {
     width: 100%;
     padding: 10px;
-    margin: 0;
-}
-/* Hiển thị cửa sổ đăng nhập khi chưa đăng nhập */
-.login-form {
-    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-/* Ẩn phần giao diện chính */
-.main-content {
-    display: none;
-}
-/* Thêm vào file style.css */
-td {
-    padding: 8px;
-    border: 1px solid #ddd;
+/* Bảng danh sách */
+.table-container {
+    overflow-x: auto;
 }
 
-td[data-password] {
-    color: #333; /* Màu chữ mặc định */
-    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-td[data-password]:hover {
-    color: #007bff; /* Đổi màu khi di chuột qua */
-}
-/* Thêm vào file style.css */
-tr {
-    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-    background-color: #f0f0f0; /* Đổi màu khi di chuột qua */
+table th {
+    background-color: #007bff;
+    color: #fff;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td button {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+table td button:hover {
+    background-color: #218838;
+}
+
+table td button:last-child {
+    background-color: #dc3545;
+}
+
+table td button:last-child:hover {
+    background-color: #c82333;
+}
+
+/* Phần thêm dữ liệu mới */
+.main-content > div {
+    margin-top: 20px;
+}
+
+.main-content h3 {
+    margin-bottom: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.main-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.main-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.main-content button:hover {
+    background-color: #0056b3;
+}
+
+/* File upload */
+input[type="file"] {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .login-form {
+        padding: 15px;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+
+    .main-content input, .main-content button {
+        width: 100%;
+    }
 }
