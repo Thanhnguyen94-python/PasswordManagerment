@@ -85,3 +85,25 @@ button:hover {
 .main-content {
     display: none;
 }
+/* Thêm vào file style.css */
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+td[data-password] {
+    color: #333; /* Màu chữ mặc định */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+td[data-password]:hover {
+    color: #007bff; /* Đổi màu khi di chuột qua */
+}
+/* Thêm vào file style.css */
+tr {
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu */
+}
+
+tr:hover {
+    background-color: #f0f0f0; /* Đổi màu khi di chuột qua */
+}

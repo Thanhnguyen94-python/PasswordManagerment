@@ -15,7 +15,8 @@
         <h2>Đăng nhập</h2>
         <input type="text" id="username" placeholder="Tên người dùng"><br>
         <input type="password" id="password" placeholder="Mật khẩu"><br>
-        <button class="btn" onclick="login()">Đăng nhập</button>
+        <button id="loginButton">Login</button>
+
     </div>
 
     <!-- Giao diện chính sau khi đăng nhập -->
@@ -40,7 +41,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Dữ liệu sẽ được hiển thị ở đây -->
+                    <tr>
+                        <td>Máy tính 1</td>
+                        <td>User1</td>
+                        <td data-password="pass1">*****</td> <!-- Hiển thị mật khẩu dưới dạng ***** -->
+                        <td>Line1</td>
+                        <td>Nhóm1</td>
+                        <td><button onclick="editItem('${key}')">Chỉnh sửa</button></td>
+                        <td><button onclick="deleteItem('${key}')">Xóa</button></td>
+                    </tr>
+                    <!-- Các hàng khác sẽ được thêm tương tự -->
                 </tbody>
             </table>
         </div>
@@ -53,16 +63,16 @@
             <input type="password" id="newPass" placeholder="Mật khẩu">
             <input type="text" id="newLine" placeholder="Line">
             <input type="text" id="newGroup" placeholder="Nhóm">
-            <button class="btn" onclick="addItem()">Thêm</button>
+            <button class="btn" id="addButton">Thêm</button>
         </div>
-        <button onclick="backupLocalStorage()">Sao lưu dữ liệu</button>
+        <input type="file" id="jsonFile" accept=".json" onchange="handleFileUpload(event)">
+
     </div>
 </div>
 
-
 <script type="module" src="firebase-config.js"></script>
 
-<script src="script.js"></script> <!-- Liên kết tới file JavaScript -->
+<script type="module" src="script.js"></script>
 
 </body>
 </html>
