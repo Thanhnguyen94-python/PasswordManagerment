@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách máy tính</title>
+    <link rel="stylesheet" href="style.css"> <!-- Liên kết tới file CSS -->
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Form đăng nhập -->
+    <div class="login-form">
+        <h2>Đăng nhập</h2>
+        <input type="text" id="username" placeholder="Tên người dùng"><br>
+        <input type="password" id="password" placeholder="Mật khẩu"><br>
+        <button class="btn" onclick="login()">Đăng nhập</button>
+    </div>
+
+    <!-- Giao diện chính sau khi đăng nhập -->
+    <div class="main-content">
+        <!-- Ô tìm kiếm -->
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Tìm kiếm ..." onkeyup="filterList()">
+        </div>
+
+        <!-- Bảng danh sách -->
+        <div class="table-container">
+            <table id="data-table">
+                <thead>
+                    <tr>
+                        <th>Tên máy tính</th>
+                        <th>User</th>
+                        <th>Password</th>
+                        <th>Line</th>
+                        <th>Nhóm</th>
+                        <th>Chỉnh sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dữ liệu sẽ được hiển thị ở đây -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Thêm dữ liệu mới -->
+        <div>
+            <h3>Thêm dữ liệu mới</h3>
+            <input type="text" id="newMachine" placeholder="Tên máy tính">
+            <input type="text" id="newUser" placeholder="User">
+            <input type="password" id="newPass" placeholder="Mật khẩu">
+            <input type="text" id="newLine" placeholder="Line">
+            <input type="text" id="newGroup" placeholder="Nhóm">
+            <button class="btn" onclick="addItem()">Thêm</button>
+        </div>
+        <button onclick="backupLocalStorage()">Sao lưu dữ liệu</button>
+    </div>
+</div>
+
+
+<script type="module" src="firebase-config.js"></script>
+
+<script src="script.js"></script> <!-- Liên kết tới file JavaScript -->
+
+</body>
+</html>

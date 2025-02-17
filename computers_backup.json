@@ -1,0 +1,142 @@
+[
+  {
+    "name": "PC-202104191609",
+    "user": "Administrator",
+    "pass": "123456",
+    "line": "Line 2",
+    "group": "DGS"
+  },
+  {
+    "name": "DESKTOP-Q6ENMTR",
+    "user": "DELL",
+    "pass": "123456",
+    "line": "Line 3",
+    "group": "DGS"
+  },
+  {
+    "name": "DESKTOP-MOIJ6HJ",
+    "user": "DELL",
+    "pass": "123456",
+    "line": "Line 4",
+    "group": "DGS"
+  },
+  {
+    "name": "TROLYSMT",
+    "user": "OANH",
+    "pass": "123456",
+    "line": "Ptrinh ",
+    "group": "Office"
+  },
+  {
+    "name": "SPI217042H",
+    "user": "Sinictek",
+    "pass": "sinictek",
+    "line": "Line 3",
+    "group": "SPI"
+  },
+  {
+    "name": "SPI217042H",
+    "user": "User",
+    "pass": "<EMPTY>",
+    "line": "Line 2",
+    "group": "SPI"
+  },
+  {
+    "name": "SPI206097H",
+    "user": "Sinictek",
+    "pass": "sinictek",
+    "line": "Line 3",
+    "group": "SPI"
+  },
+  {
+    "name": "SPI2310433X",
+    "user": "Sinictek",
+    "pass": "sinictek",
+    "line": "Line 4",
+    "group": "SPI"
+  },
+  {
+    "name": "TRI-RepairPC-03",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 2-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-RepairPC-03-2",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 2-2",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-RepairPC-08",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 3-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-RepairPC",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 3-2",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-RepairPC-18",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 4-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-RepairPC-17",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 4-2",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MainPC",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 2-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MainPC",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 2-2",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MAINPC-11",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 3-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MAINPC-12",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 3-2",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MainPC-18",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 4-1",
+    "group": "AOI"
+  },
+  {
+    "name": "TRI-MainPC-17",
+    "user": "TRI",
+    "pass": "aoi",
+    "line": "Line 4-2",
+    "group": "AOI"
+  }
+]

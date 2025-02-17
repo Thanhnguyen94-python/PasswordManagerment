@@ -1,0 +1,96 @@
+﻿http://172.16.250.202:8081/smartMes/mesv/qj.ui/qjui/index.html
+
+****************DGS line 2		 
+Tên máy tính: PC-202104191609
+User: Administrator
+Pass: 123456
+
+****************DGS line 3 
+Tên máy tính: DESKTOP-Q6ENMTR
+User: DELL
+Pass: 123456
+
+****************DGS line 4  
+Tên máy tính: DESKTOP-MOIJ6HJ
+User: DELL
+Pass: 123456
+
+****************Ptrinh  
+Tên máy tính: TROLYSMT
+User: OANH
+Pass: 123456
+
+***************SPI line 2 
+Tên máy tính: SPI217042H
+User: User
+Pass: <Empty>
+
+***************SPI line 3 
+Tên máy tính: SPI206097H
+User: Sinictek
+Pass: sinictek
+
+***************SPI line 4  
+Tên máy tính: SPI2310433X
+User: Sinictek
+Pass: sinictek
+
+****************AOI Repair line 2-1
+Tên máy tính: TRI-RepairPC-03
+User: TRI
+Pass: aoi
+
+****************AOI Repair line 2-2
+Tên máy tính: TRI-RepairPC-03-2
+User: TRI
+Pass: aoi
+
+****************AOI Repair line 3-1
+Tên máy tính: TRI-RepairPC-08
+User: TRI
+Pass: aoi
+
+****************AOI Repair line 3-2
+Tên máy tính: TRI-RepairPC
+User: TRI
+Pass: aoi
+
+****************AOI Repair line 4-1
+Tên máy tính: TRI-RepairPC-18
+User: TRI
+Pass: aoi
+
+****************AOI Repair line 4-2
+Tên máy tính: TRI-RepairPC-17
+User: TRI
+Pass: aoi
+
+****************AOI line 2-1
+Tên máy tính: TRI-MainPC
+User: TRI
+Pass: aoi
+
+****************AOI line 2-2
+Tên máy tính: TRI-MainPC
+User: TRI
+Pass: aoi
+
+****************AOI line 3-1
+Tên máy tính: TRI-MAINPC-11
+User: TRI
+Pass: aoi
+
+****************AOI line 3-2
+Tên máy tính: TRI-MAINPC-12
+User: TRI
+Pass: aoi
+
+****************AOI line 4-1
+Tên máy tính: TRI-MainPC-18
+User: TRI
+Pass: aoi
+
+****************AOI line 4-2
+Tên máy tính: TRI-MainPC-17
+User: TRI
+Pass: aoi
