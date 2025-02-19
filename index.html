@@ -3,27 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý danh sách máy tính</title>
+    <title>Quản lý hệ thống</title>
     <link rel="stylesheet" href="style.css"> <!-- Liên kết tới file CSS -->
 </head>
 <body>
 
+<!-- Thanh điều hướng -->
+<nav class="navbar">
+    <ul>
+        
+        <li><a href="#" onclick="event.preventDefault(); showPage('home')">Trang chủ</a></li>
+        <li><a href="#" onclick="event.preventDefault();showPage('computer-list')">Danh sách máy tính</a></li>
+        <li><a href="#" onclick="event.preventDefault();showPage('documents')">Tài liệu máy</a></li>
+        <li><a href="#" onclick="event.preventDefault();showPage('software')">Phần mềm</a></li>
+        <li><a href="#" onclick="event.preventDefault();showPage('reports')">Công cụ báo cáo</a></li>
+        <li><a href="#" onclick="event.preventDefault();showPage('attendance')">Quản lý chấm công</a></li>
+    </ul>
+</nav>
+<!-- Thêm vào sau thẻ <nav> -->
+<div class="user-avatar" id="userAvatar" style="display: none;">
+    <span id="usernameDisplay">Admin</span>
+    <div class="avatar-icon">👤</div>
+</div>
+
 <div class="container">
 
-    <!-- Form đăng nhập -->
-    <div class="login-form">
-        <h2>Đăng nhập</h2>
-        <input type="text" id="username" placeholder="Tên người dùng"><br>
-        <input type="password" id="password" placeholder="Mật khẩu"><br>
-        <button id="loginButton">Login</button>
-
+    <!-- Trang chủ -->
+    <div id="home" class="page">
+        <h1>Trang chủ</h1>
+        <p>Chào mừng bạn đến với hệ thống quản lý!</p>
     </div>
 
-    <!-- Giao diện chính sau khi đăng nhập -->
-    <div class="main-content">
-        <!-- Ô tìm kiếm -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Tìm kiếm ..." onkeyup="filterList()">
+    <!-- Danh sách quản lý máy tính -->
+    <div id="computer-list" class="page" style="display: none;">
+        <h1>Danh sách quản lý máy tính</h1>
+        <!-- Form đăng nhập -->
+        <div class="login-form" style="display: block;">
+            <h2>Đăng nhập hệ thống</h2>
+            <input type="text" id="username" placeholder="Tên đăng nhập">
+            <input type="password" id="password" placeholder="Mật khẩu">
+            <div class="forgot-password">
+                <a href="#" onclick="showPasswordReset()">Quên mật khẩu?</a>
+            </div>
+            <button id="loginButton">Đăng nhập</button>
         </div>
 
         <!-- Bảng danh sách -->
@@ -44,13 +66,12 @@
                     <tr>
                         <td>Máy tính 1</td>
                         <td>User1</td>
-                        <td data-password="pass1">*****</td> <!-- Hiển thị mật khẩu dưới dạng ***** -->
+                        <td data-password="pass1">*****</td>
                         <td>Line1</td>
                         <td>Nhóm1</td>
                         <td><button onclick="editItem('${key}')">Chỉnh sửa</button></td>
                         <td><button onclick="deleteItem('${key}')">Xóa</button></td>
                     </tr>
-                    <!-- Các hàng khác sẽ được thêm tương tự -->
                 </tbody>
             </table>
         </div>
@@ -66,12 +87,53 @@
             <button class="btn" id="addButton">Thêm</button>
         </div>
         <input type="file" id="jsonFile" accept=".json" onchange="handleFileUpload(event)">
-
     </div>
+
+    <!-- Tài liệu máy -->
+    <div id="documents" class="page" style="display: none;">
+        <h1>Tài liệu máy</h1>
+        <p>Danh sách tài liệu hướng dẫn sử dụng máy tính.</p>
+    </div>
+
+    <!-- Các phần mềm -->
+    <div id="software" class="page" style="display: none;">
+        <h1>Các phần mềm</h1>
+        <p>Danh sách các phần mềm được cài đặt trên máy tính.</p>
+    </div>
+
+    <!-- Công cụ báo cáo -->
+    <div id="reports" class="page" style="display: none;">
+        <h1>Công cụ báo cáo</h1>
+        <p>Các công cụ để tạo báo cáo hệ thống.</p>
+    </div>
+
+    <!-- Quản lý chấm công -->
+    <div id="attendance" class="page" style="display: none;">
+        <h1>Quản lý chấm công</h1>
+        <p>Theo dõi và quản lý chấm công nhân viên.</p>
+    </div>
+
 </div>
-
+<script type="module">
+    function showPage(pageId) {
+        const pages = document.querySelectorAll('.page');
+        pages.forEach(page => {
+            page.style.display = 'none';
+        });
+        
+        const activePage = document.getElementById(pageId);
+        if (activePage) {
+            activePage.style.display = 'block';
+        }
+        
+        if (pageId === 'computer-list' && typeof loadDataFromFirebase === 'function') {
+            loadDataFromFirebase();
+        }
+    }
+    window.showPage = showPage;
+</script>
+</script>
 <script type="module" src="firebase-config.js"></script>
-
 <script type="module" src="script.js"></script>
 
 </body>

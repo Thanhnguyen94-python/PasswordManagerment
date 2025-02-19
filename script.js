@@ -3,222 +3,176 @@ import {
   get, ref, push, update, remove 
 } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-database.js";
 
-function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+// ================== CẤU HÌNH CHUNG ==================
+const auth = {
+  username: "admin",
+  password: "admin123"
+};
 
-    if (username === "admin" && password === "admin123") {
-        document.querySelector(".login-form").style.display = "none";
-        document.querySelector(".main-content").style.display = "block";
-        loadDataFromFirebase();  // Load data from Firebase upon successful login
-    } else {
-        alert("Incorrect username or password!");
-    }
+const domElements = {
+  loginForm: document.querySelector(".login-form"),
+  userAvatar: document.getElementById("userAvatar"),
+  dataTable: document.getElementById("data-table"),
+  // ... thêm các phần tử DOM khác nếu cần
+};
+
+// ================== HÀM XỬ LÝ CHÍNH ==================
+function initializeEventListeners() {
+  // Sự kiện đăng nhập
+  document.getElementById("loginButton").addEventListener("click", handleLogin);
+  
+  // Sự kiện bảng
+  domElements.dataTable.addEventListener("click", handleTableClick);
+  
+  // Sự kiện form thêm mới
+  document.getElementById("addButton").addEventListener("click", handleAddItem);
 }
 
+async function handleLogin() {
+  const username = document.getElementById("username").value.trim();
+  const password = document.getElementById("password").value.trim();
 
-// Hàm tải dữ liệu từ Firebase
-function loadDataFromFirebase() {
-    console.log("Dữ liệu đang được tải từ Firebase...");
-
-    // Lấy tham chiếu đến dữ liệu trong Firebase
-    const dbRef = ref(database,'machines');  // 'machines' là tên của node trong Realtime Database
-
-    // Lấy dữ liệu từ Firebase
-    get(dbRef)
-        .then((snapshot) => {
-            if (snapshot.exists()) {
-                const data = snapshot.val();
-                displayData(data);  // Gọi hàm để hiển thị dữ liệu trong bảng
-            } else {
-                console.log("Không có dữ liệu.");
-            }
-        })
-        .catch((error) => {
-            console.error("Lỗi khi lấy dữ liệu: ", error);
-        });
+  if (username === auth.username && password === auth.password) {
+    domElements.loginForm.style.display = "none";
+    domElements.userAvatar.style.display = "flex";
+    showPage('computer-list');
+    await loadDataFromFirebase();
+  } else {
+    alert("Thông tin đăng nhập không chính xác!");
+    domElements.loginForm.classList.add('shake');
+    setTimeout(() => domElements.loginForm.classList.remove('shake'), 500);
+  }
 }
 
-// Hàm hiển thị dữ liệu vào bảng
+async function loadDataFromFirebase() {
+  try {
+    const snapshot = await get(ref(database, 'machines'));
+    displayData(snapshot.exists() ? snapshot.val() : {});
+  } catch (error) {
+    console.error("Lỗi tải dữ liệu:", error);
+    alert("Không thể tải dữ liệu từ server!");
+  }
+}
+
 function displayData(data) {
-  const tableBody = document.querySelector("#data-table tbody");
-  tableBody.innerHTML = ""; // Xóa nội dung bảng trước khi thêm dữ liệu mới
-
-  for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-          const row = data[key]; // Dữ liệu của mỗi máy tính
-
-          // Tạo một hàng mới trong bảng
-          const tr = document.createElement("tr");
-
-          // Thêm các cột dữ liệu
-          tr.innerHTML = `
-              <td>${row.name}</td>
-              <td>${row.user}</td>
-              <td data-password="${row.password}">*****</td> <!-- Gán lại data-password -->
-              <td>${row.line}</td>
-              <td>${row.group}</td>
-              <td><button class="edit-btn" data-key="${key}">Chỉnh sửa</button></td>
-              <td><button class="delete-btn" data-key="${key}">Xóa</button></td>
-          `;
-          tableBody.appendChild(tr);
-      }
-  }
+  const tableBody = domElements.dataTable.querySelector("tbody");
+  tableBody.innerHTML = Object.entries(data).map(([key, item]) => `
+    <tr>
+      <td>${item.name}</td>
+      <td>${item.user}</td>
+      <td data-password="${item.password}">*****</td>
+      <td>${item.line}</td>
+      <td>${item.group}</td>
+      <td><button class="edit-btn" data-key="${key}">Sửa</button></td>
+      <td><button class="delete-btn" data-key="${key}">Xóa</button></td>
+    </tr>
+  `).join('');
 }
 
-// ================== CÁC HÀM CHÍNH ==================
-
-// Hàm lọc dữ liệu trong bảng
-function filterList() {
-  const input = document.getElementById("searchInput");
-  const filter = input.value.toUpperCase(); // Chuyển từ khóa tìm kiếm thành chữ hoa
-  const table = document.getElementById("data-table");
-  const tr = table.getElementsByTagName("tr");
-
-  // Duyệt qua từng hàng (bỏ qua hàng đầu tiên là header)
-  for (let i = 1; i < tr.length; i++) {
-    const tds = tr[i].getElementsByTagName("td"); // Lấy tất cả các ô trong hàng
-    let isMatch = false; // Biến kiểm tra xem hàng có khớp với từ khóa không
-
-    // Duyệt qua các cột cần tìm kiếm (ví dụ: cột 0, 1, 3, 4)
-    for (let j = 0; j < tds.length; j++) {
-      if (j === 2) continue; // Bỏ qua cột Password (cột thứ 3, index 2)
-      const td = tds[j];
-      if (td) {
-        const txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().includes(filter)) {
-          isMatch = true; // Nếu tìm thấy từ khóa, đánh dấu là khớp
-          break; // Thoát vòng lặp nếu đã tìm thấy kết quả
-        }
-      }
-    }
-
-    // Hiển thị hoặc ẩn hàng dựa trên kết quả tìm kiếm
-    tr[i].style.display = isMatch ? "" : "none";
-  }
-}
-
-// Hàm thêm dữ liệu mới
-function addItem() {
-  const newMachine = document.getElementById("newMachine").value;
-  const newUser = document.getElementById("newUser").value;
-  const newPass = document.getElementById("newPass").value;
-  const newLine = document.getElementById("newLine").value;
-  const newGroup = document.getElementById("newGroup").value;
-
-  if (!newMachine || !newUser || !newPass) {
-    alert("Vui lòng điền đầy đủ thông tin bắt buộc (Tên máy, User, Mật khẩu)");
+function handleTableClick(e) {
+  const target = e.target;
+  
+  // Xử lý xem mật khẩu
+  if (target.matches('td[data-password]')) {
+    showPassword(target);
     return;
   }
 
-  const newData = {
-    name: newMachine,
-    user: newUser,
-    password: newPass,
-    line: newLine,
-    group: newGroup
-  };
-
-  // Thêm dữ liệu vào Firebase   , 'machines/'
-  push(ref(database,'machines/'), newData)
-    .then(() => {
-      alert("Thêm dữ liệu thành công!");
-      loadDataFromFirebase(); // Load lại dữ liệu
-      // Xóa form nhập
-      document.querySelectorAll('#newMachine, #newUser, #newPass, #newLine, #newGroup')
-        .forEach(input => input.value = '');
-    })
-    .catch((error) => {
-      console.error("Lỗi khi thêm dữ liệu: ", error);
-    });
+  // Xử lý các action
+  const key = target.dataset.key;
+  if (target.matches('.edit-btn')) return handleEdit(key);
+  if (target.matches('.delete-btn')) return handleDelete(key);
 }
 
-// Hàm chỉnh sửa dữ liệu
-function editItem(key) {
-  const row = document.querySelector(`[data-key="${key}"]`).parentElement.parentElement;
-  const cells = row.getElementsByTagName("td");
+async function handleAddItem() {
+  const inputs = {
+    name: document.getElementById("newMachine"),
+    user: document.getElementById("newUser"),
+    password: document.getElementById("newPass"),
+    line: document.getElementById("newLine"),
+    group: document.getElementById("newGroup")
+  };
+
+  // Validate dữ liệu
+  if (!inputs.name.value || !inputs.user.value || !inputs.password.value) {
+    return alert("Vui lòng điền đầy đủ các trường bắt buộc!");
+  }
+
+  try {
+    await push(ref(database, 'machines'), {
+      name: inputs.name.value,
+      user: inputs.user.value,
+      password: inputs.password.value,
+      line: inputs.line.value,
+      group: inputs.group.value
+    });
+    
+    // Reset form và tải lại dữ liệu
+    Object.values(inputs).forEach(input => input.value = '');
+    await loadDataFromFirebase();
+    alert("Thêm máy tính thành công!");
+  } catch (error) {
+    console.error("Lỗi khi thêm dữ liệu:", error);
+    alert("Có lỗi xảy ra khi thêm máy tính!");
+  }
+}
+
+async function handleEdit(key) {
+  const snapshot = await get(ref(database, `machines/${key}`));
+  const currentData = snapshot.val();
 
   const newData = {
-      name: prompt("Tên máy mới:", cells[0].textContent),
-      user: prompt("User mới:", cells[1].textContent),
-      password: prompt("Mật khẩu mới:", cells[2].textContent),
-      line: prompt("Line mới:", cells[3].textContent),
-      group: prompt("Nhóm mới:", cells[4].textContent)
+    name: prompt("Tên máy mới:", currentData.name),
+    user: prompt("User mới:", currentData.user),
+    password: prompt("Mật khẩu mới:", currentData.password),
+    line: prompt("Line mới:", currentData.line),
+    group: prompt("Nhóm mới:", currentData.group)
   };
 
   if (newData.name && newData.user && newData.password) {
-      update(ref(database, `machines/${key}`), newData)
-          .then(() => {
-              alert("Cập nhật thành công!");
-              loadDataFromFirebase(); // Tải lại dữ liệu
-          })
-          .catch((error) => {
-              console.error("Lỗi khi cập nhật:", error);
-          });
-  }
-}
-
-// Hàm xóa dữ liệu
-function deleteItem(key) {
-  if (confirm("Bạn chắc chắn muốn xóa?")) {
-    remove(ref(database, `machines/${key}`))
-      .then(() => loadDataFromFirebase())
-      .catch((error) => console.error("Lỗi khi xóa:", error));
-  }
-}
-
-// Hàm xử lý upload file JSON
-function handleFileUpload(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = (e) => {
     try {
-      const data = JSON.parse(e.target.result);
-      Object.values(data).forEach(item => {
-        push(ref(database,'machines'), item);
-      });
-      alert("Import dữ liệu thành công!");
-      loadDataFromFirebase();
+      await update(ref(database, `machines/${key}`), newData);
+      await loadDataFromFirebase();
+      alert("Cập nhật thành công!");
     } catch (error) {
-      alert("File JSON không hợp lệ!");
+      console.error("Lỗi khi cập nhật:", error);
+      alert("Có lỗi xảy ra khi cập nhật!");
     }
-  };
-  reader.readAsText(file);
+  }
 }
 
-function showPassword(cell, password) {
-  const originalContent = cell.textContent; // Lưu lại nội dung gốc của ô (*****)
-  cell.textContent = password; // Hiển thị mật khẩu thực
-
-  // Khôi phục lại nội dung gốc sau 5 giây
-  setTimeout(() => {
-      cell.textContent = originalContent; // Chuyển lại thành *****
-  }, 5000); // 5000ms = 5 giây
+async function handleDelete(key) {
+  if (!confirm("Bạn chắc chắn muốn xóa máy tính này?")) return;
+  
+  try {
+    await remove(ref(database, `machines/${key}`));
+    await loadDataFromFirebase();
+    alert("Xóa máy tính thành công!");
+  } catch (error) {
+    console.error("Lỗi khi xóa:", error);
+    alert("Có lỗi xảy ra khi xóa!");
+  }
 }
 
-// ================== EVENT LISTENERS ==================
-document.getElementById("loginButton").addEventListener("click", login);
-document.getElementById("searchInput").addEventListener("keyup", filterList);
-document.querySelector(".btn").addEventListener("click", addItem);
-document.getElementById("jsonFile").addEventListener("change", handleFileUpload);
-document.getElementById("addButton").addEventListener("click", addItem);
+// ================== HÀM TIỆN ÍCH ==================
+function showPassword(cell) {
+  const original = cell.textContent;
+  cell.textContent = cell.dataset.password;
+  setTimeout(() => cell.textContent = original, 3000);
+}
 
-// Xử lý sự kiện cho nút Edit/Delete (Event Delegation)
-document.getElementById("data-table").addEventListener("click", (e) => {
-  if (e.target.classList.contains("edit-btn")) {
-    editItem(e.target.dataset.key);
-  }
-  if (e.target.classList.contains("delete-btn")) {
-    deleteItem(e.target.dataset.key);
-  }
-});
-document.getElementById("data-table").addEventListener("click", (e) => {
-  if (e.target.tagName === "TD" && e.target.hasAttribute("data-password")) {
-      const passwordCell = e.target; // Ô Password được click
-      const password = passwordCell.dataset.password; // Lấy mật khẩu từ data attribute
-      showPassword(passwordCell, password); // Gọi hàm hiển thị mật khẩu
-  }
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(page => 
+    page.style.display = page.id === pageId ? 'block' : 'none'
+  );
+}
+
+// ================== KHỞI TẠO ỨNG DỤNG ==================
+document.addEventListener('DOMContentLoaded', () => {
+  initializeEventListeners();
+  showPage('home');
 });
 
+// Xuất các hàm cần thiết
+window.loadDataFromFirebase = loadDataFromFirebase;
+window.showPage = showPage;
