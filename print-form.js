@@ -95,7 +95,7 @@ function updateFormDisplay() {
         template.className = 'form-template';
         template.innerHTML = `
             <div class="header">
-                <img src="https://thanhnguyen94-python.github.io/PasswordManagerment/logo.jpg" alt="Logo" class="logo">
+                <img src="https://github.com/Thanhnguyen94-python/PasswordManagerment/blob/master/logo.JPG" alt="Logo" class="logo">
                 <h1>CÔNG TY ABC</h1>
             </div>
             <hr class="header-divider">
@@ -278,7 +278,7 @@ function printForm() {
         printWindow.document.write(`
             <div class="form-template">
                 <div class="header">
-                    <img src="https://thanhnguyen94-python.github.io/PasswordManagerment/logo.jpg" alt="Logo" class="logo">
+                    <img src="https://github.com/Thanhnguyen94-python/PasswordManagerment/blob/master/logo.JPG" alt="Logo" class="logo">
                     <h1>CÔNG TY ABC</h1>
                 </div>
                 <hr class="header-divider">
