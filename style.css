@@ -51,7 +51,7 @@
       
       a {
         color: #ecf0f1;
-        padding: 1.2rem;
+        padding: 1rem;
         display: block;
         transition: var(--transition);
         border-bottom: 3px solid transparent;
@@ -192,7 +192,7 @@
   .container {
     max-width: 1200px;
     margin: 80px auto 30px;
-    padding: 0 25px;
+    padding: 70px 25px 30px;
   }
   
   .page {
@@ -214,25 +214,35 @@
   .mt-1 { margin-top: 1rem; }
   
   /* =============== RESPONSIVE =============== */
-  @media (max-width: 768px) {
-    .navbar {
-      ul { flex-direction: column; }
-      li { width: 100%; }
-    }
-    
-    .user-avatar {
-      right: 15px;
-      padding: 6px 15px;
-      --size: 30px;
-    }
-  
-    .page { padding: 1.2rem; }
+  /* Responsive cho màn hình nhỏ */
+@media (max-width: 768px) {
+  .navbar ul {
+      flex-direction: column; /* Xếp dọc các tab */
+      padding: 0;
   }
   
-  @media (max-width: 480px) {
-    .user-avatar span { display: none; }
-    th, td { padding: 12px 15px; }
+  .navbar li {
+      width: 100%;
   }
+  
+  .navbar a {
+      padding: 0.8rem; /* Giảm padding để navbar đỡ cao */
+  }
+  
+  .container {
+      padding-top: 120px; /* Tăng padding-top khi navbar xếp dọc */
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar a {
+      padding: 0.6rem; /* Giảm thêm trên màn siêu nhỏ */
+  }
+  
+  .container {
+      padding-top: 100px; /* Giảm nhẹ nhưng vẫn đủ */
+  }
+}
 /* Định dạng mẫu in thiết bị */
 .form-container {
   width: 100%;
