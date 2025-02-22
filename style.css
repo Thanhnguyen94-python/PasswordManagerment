@@ -1,3 +1,4 @@
+
 /* =============== CSS VARIABLES =============== */
 :root {
     --primary-color: #3498db;
@@ -232,3 +233,118 @@
     .user-avatar span { display: none; }
     th, td { padding: 12px 15px; }
   }
+/* Định dạng mẫu in thiết bị */
+.form-container {
+  width: 100%;
+  max-width: 794px; /* Toàn bộ chiều ngang A4 */
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các mẫu xuống dòng khi hết chỗ */
+  gap: 10px; /* Khoảng cách giữa các mẫu */
+}
+
+#documents .form-template {
+  margin-top: 0; /* Bỏ margin-top vì dùng gap */
+  padding: 10px;
+  border: 2px solid #000;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+  width: 370px; /* Chiều rộng mỗi mẫu, đủ để xếp 2 mẫu trên A4 */
+  position: relative;
+  box-sizing: border-box;
+}
+
+#documents .form-template::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid #999;
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+/* Các phần tử khác giữ nguyên nhưng giảm kích thước */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px; /* Giảm từ 10px */
+}
+
+.header h1 {
+  font-size: 16px; /* Giảm từ 20px */
+  color: #3498db;
+  text-transform: uppercase;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.logo {
+  width: 50px; /* Giảm từ 60px */
+  height: auto;
+  border-radius: 5px;
+}
+
+.header-divider {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 3px 0; /* Giảm từ 5px */
+}
+
+.form-content {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0; /* Giảm từ 10px */
+}
+
+.device-info {
+  width: 60%;
+}
+
+.qr-section {
+  width: 35%;
+  text-align: center;
+}
+
+.field-box {
+  display: flex;
+  align-items: center;
+  border: 1px solid #333;
+  border-radius: 5px;
+  margin-bottom: 3px; /* Giảm từ 5px */
+  padding: 3px; /* Giảm từ 5px */
+  background: #f9f9f9;
+}
+
+.field-label {
+  font-weight: bold;
+  width: 80px; /* Giảm từ 100px */
+  color: #2c3e50;
+  border-right: 1px solid #ccc;
+  padding-right: 3px; /* Giảm từ 5px */
+  margin-right: 3px; /* Giảm từ 5px */
+}
+
+.field-value {
+  flex: 1;
+  padding-left: 3px; /* Giảm từ 5px */
+  color: #333;
+}
+
+.qr-container {
+  border: 1px solid #333;
+  border-radius: 5px;
+  padding: 3px; /* Giảm từ 5px */
+  display: inline-block;
+  margin-top: 3px; /* Giảm từ 5px */
+  background: #fff;
+}
+
+.qr-container canvas {
+  width: 80px !important; /* Giảm từ 100px */
+  height: 80px !important;
+}

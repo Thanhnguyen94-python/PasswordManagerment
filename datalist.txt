@@ -1,0 +1,17 @@
+Tên thiết bị: Máy in HP LaserJet
+Ngày nhập: 15/03/2023
+Bộ phận quản lý: IT
+Vị trí hiện tại: Phòng 302
+Mã quản lý: HP12345
+---
+Tên thiết bị: Laptop Dell XPS
+Ngày nhập: 20/05/2023
+Bộ phận quản lý: Kế toán
+Vị trí hiện tại: Phòng 401
+Mã quản lý: DX67890
+---
+Tên thiết bị: Màn hình LG
+Ngày nhập: 10/01/2024
+Bộ phận quản lý: Nhân sự
+Vị trí hiện tại: Phòng 205
+Mã quản lý: LG54321

@@ -1,4 +1,3 @@
-// firebase-config.js
 
 // Nhập các module Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
